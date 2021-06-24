@@ -33,16 +33,13 @@ class JitsiWidget extends IFrame {
     const queryElems = [];
 
     for (const k in options as any) {
-      if (k == 'options')
-      {
+      if (k === 'options') {
         const opts = options.options;
-        const jopts = JSON.stringify(opts)
+        const jopts = JSON.stringify(opts);
         queryElems.push(
           encodeURIComponent(k) + '=' + encodeURIComponent(jopts)
         );
-      }
-      else
-      {
+      } else {
         queryElems.push(
           encodeURIComponent(k) + '=' + encodeURIComponent((options as any)[k])
         );
@@ -146,7 +143,10 @@ const extension: JupyterFrontEndPlugin<void> = {
           registeredCommands.push(lcmd);
         }
 
-        const pcmd = palette.addItem({ command: full_cmd, category: 'Robotics' });
+        const pcmd = palette.addItem({
+          command: full_cmd,
+          category: 'Robotics'
+        });
         registeredCommands.push(pcmd);
 
         i += 1;
