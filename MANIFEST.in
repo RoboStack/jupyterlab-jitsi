@@ -9,8 +9,8 @@ include install.json
 include ts*.json
 include yarn.lock
 
-graft jupyterlab-jitsi/labextension
-graft jupyterlab-jitsi/jitsi
+graft jupyterlab_jitsi/labextension
+graft jupyterlab_jitsi/jitsi
 
 # Javascript files
 graft src

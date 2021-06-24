@@ -36,7 +36,7 @@
     "build:lib": "tsc",
     "clean": "jlpm run clean:lib",
     "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
-    "clean:labextension": "rimraf jupyterlab-jitsi/labextension",
+    "clean:labextension": "rimraf jupyterlab_jitsi/labextension",
     "clean:all": "jlpm run clean:lib && jlpm run clean:labextension",
     "eslint": "eslint . --ext .ts,.tsx --fix",
     "eslint:check": "eslint . --ext .ts,.tsx",
@@ -82,7 +82,7 @@
       }
     },
     "extension": true,
-    "outputDir": "jupyterlab-jitsi/labextension",
+    "outputDir": "jupyterlab_jitsi/labextension",
     "schemaDir": "schema"
   },
   "jupyter-releaser": {

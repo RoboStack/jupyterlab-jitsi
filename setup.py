@@ -28,7 +28,6 @@ data_files_spec = [
     # For backward compatibility with notebook server
     ("etc/jupyter/jupyter_notebook_config.d",
      "jupyter-config/nb-config", "jupyterlab-jitsi.json"),
-    
 ]
 
 long_description = (HERE / "README.md").read_text()

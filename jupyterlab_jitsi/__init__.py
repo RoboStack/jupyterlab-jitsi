@@ -22,7 +22,7 @@ from .handlers import setup_handlers
 
 def _jupyter_server_extension_points():
     return [{
-        "module": "jupyterlab-jitsi"
+        "module": "jupyterlab_jitsi"
     }]
 
 
