@@ -1,7 +1,7 @@
 {
   "ServerApp": {
     "jpserver_extensions": {
-      "jupyterlab-jitsi": true
+      "jupyterlab_jitsi": true
     }
   }
 }
