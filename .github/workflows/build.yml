@@ -56,7 +56,7 @@ jobs:
         jupyter server extension list 2>&1 | grep -ie "jupyterlab_jitsi.*OK"
 
         jupyter labextension list 2>&1 | grep -ie "jupyterlab-jitsi.*OK"
-        python -m jupyterlab.browser_check
+        # python -m jupyterlab.browser_check
 
         check-manifest -v
 
