@@ -1,0 +1,36 @@
+{
+  "jupyter.lab.shortcuts": [],
+  "title": "jupyterlab-jitsi",
+  "description": "jupyterlab-jitsi settings.",
+  "type": "object",
+  "properties": {
+      "configured_rooms": {
+        "type": "array",
+        "title": "Configured rooms",
+        "description": "Configure Jitsi rooms.",
+        "default": [{
+          "domain": "meet.jit.si",
+          "options": {
+            "roomName": "jupyterlab-jitsi-example-room",
+            "configOverwrite": {
+              "enableWelcomePage": false,
+              "disableShortcuts": true,
+              "disableInitialGUM": true,
+              "enableClosePage": false,
+              "disableProfile": true,
+              "prejoinPageEnabled": false,
+              "startWithAudioMuted": true,
+              "toolbarButtons": [],
+              "disableJoinLeaveSounds": true,
+              "disableInviteFunctions": true
+            },
+            "interfaceConfigOverwrite": {
+              "MOBILE_APP_PROMO": false,
+              "SHOW_CHROME_EXTENSION_BANNER": false
+            }
+          }
+        }]
+      }
+  },
+  "additionalProperties": false
+}

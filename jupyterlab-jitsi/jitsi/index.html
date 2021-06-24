@@ -1,0 +1,28 @@
+<!doctype html>
+
+<html lang="en" style="height: 100vh; width: 100vw; padding: 0; margin: 0;">
+<head>
+<script src='https://meet.jit.si/external_api.js'></script>
+</head>
+<body style="height: 100vh; width: 100vw; padding: 0; margin: 0;">
+<div id="meet" style="height: 100vh; width: 100vw; padding: 0; margin: 0;">
+</div>
+</body>
+<script type="text/javascript"> 
+const urlSearchParams = new URLSearchParams(window.location.search);
+const urlParams = Object.fromEntries(urlSearchParams.entries());
+console.log("Parsed options: ", urlParams);
+
+options = JSON.parse(urlParams.options) || {}
+console.log("Parsed options: ", options);
+
+const domain = urlParams.domain || "meet.jit.si";
+options.width = "100%";
+options.height = "100%";
+options.parentNode = document.querySelector('#meet');
+
+const api = new JitsiMeetExternalAPI(domain, options);
+
+</script>
+
+</html>
