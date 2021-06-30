@@ -51,12 +51,11 @@ class JitsiWidget extends IFrame {
     this.url = baseUrl + `jitsi/app/index.html?${this.query}`;
     console.log('Full URL: ', this.url);
 
-    let label : string;
-    if('roomAlias' in  options['options']){
-      label = options['options']['roomAlias']
-    }
-    else{
-      label = `Room #${room_index + 1} ${options['options']['roomName']}`
+    let label: string;
+    if ('roomAlias' in options['options']) {
+      label = options['options']['roomAlias'];
+    } else {
+      label = `Room #${room_index + 1} ${options['options']['roomName']}`;
     }
 
     this.id = 'Jitsi';
@@ -119,24 +118,21 @@ const extension: JupyterFrontEndPlugin<void> = {
       }
       registeredCommands = [];
 
-
       enpoints.forEach((epconf, room_index) => {
-
         // const full_cmd = command + `:${i}`
         const full_cmd = command + `:${i}`;
-        
-        var options = epconf['options'];
+
+        const options = epconf['options'];
         const widget = new JitsiWidget(epconf, room_index);
 
         let label: string;
-        if('roomAlias' in  options){
-          label = options['roomAlias']
-        }
-        else{
-          label = `Room #${room_index + 1} ${options['roomName']}`
+        if ('roomAlias' in options) {
+          label = options['roomAlias'];
+        } else {
+          label = `Room #${room_index + 1} ${options['roomName']}`;
         }
         const rcmd = app.commands.addCommand(full_cmd, {
-          label : label,
+          label: label,
           execute: () => {
             if (!widget.isAttached) {
               // Attach the widget to the main work area if it's not there
