@@ -15,7 +15,7 @@ import { IFrame } from '@jupyterlab/apputils';
 import { PageConfig } from '@jupyterlab/coreutils';
 import iconSvgStr from '../style/icon.svg';
 
-export const fooIcon = new LabIcon({
+export const camIcon = new LabIcon({
   name: 'jupyterlab-jitsi:icon',
   svgstr: iconSvgStr
 });
@@ -28,7 +28,7 @@ const SETTINGS_ID = 'jupyterlab-jitsi:plugin';
 class JitsiWidget extends IFrame {
   query: string;
 
-  constructor(options: any) {
+  constructor(options: any, room_index: number) {
     super();
     const queryElems = [];
 
@@ -51,12 +51,19 @@ class JitsiWidget extends IFrame {
     this.url = baseUrl + `jitsi/app/index.html?${this.query}`;
     console.log('Full URL: ', this.url);
 
+    let label: string;
+    if ('roomAlias' in options['options']) {
+      label = options['options']['roomAlias'];
+    } else {
+      label = `Room #${room_index + 1} ${options['options']['roomName']}`;
+    }
+
     this.id = 'Jitsi';
-    this.title.label = 'Jitsi';
+    this.title.label = label;
+    this.title.icon = camIcon;
     this.title.closable = true;
     this.node.style.overflowY = 'auto';
     this.node.style.background = '#FFF';
-
     this.sandbox = [
       'allow-forms',
       'allow-modals',
@@ -111,16 +118,21 @@ const extension: JupyterFrontEndPlugin<void> = {
       }
       registeredCommands = [];
 
-      for (const epconf of enpoints) {
+      enpoints.forEach((epconf, room_index) => {
         // const full_cmd = command + `:${i}`
         const full_cmd = command + `:${i}`;
 
-        const widget = new JitsiWidget(epconf);
+        const options = epconf['options'];
+        const widget = new JitsiWidget(epconf, room_index);
 
+        let label: string;
+        if ('roomAlias' in options) {
+          label = options['roomAlias'];
+        } else {
+          label = `Room #${room_index + 1} ${options['roomName']}`;
+        }
         const rcmd = app.commands.addCommand(full_cmd, {
-          label: `Connect to VNC ${i}: ${
-            'name' in epconf ? epconf['name'] : epconf['host']
-          }`,
+          label: label,
           execute: () => {
             if (!widget.isAttached) {
               // Attach the widget to the main work area if it's not there
@@ -129,7 +141,7 @@ const extension: JupyterFrontEndPlugin<void> = {
             // Activate the widget
             app.shell.activateById(widget.id);
           },
-          icon: fooIcon
+          icon: camIcon
         });
         registeredCommands.push(rcmd);
 
@@ -137,7 +149,7 @@ const extension: JupyterFrontEndPlugin<void> = {
         if (launcher) {
           const lcmd = launcher.add({
             command: full_cmd,
-            rank: 1,
+            rank: 1 + room_index,
             category: 'Robotics'
           });
           registeredCommands.push(lcmd);
@@ -150,9 +162,8 @@ const extension: JupyterFrontEndPlugin<void> = {
         registeredCommands.push(pcmd);
 
         i += 1;
-      }
+      });
     };
-
     settings.load(SETTINGS_ID).then(setting => {
       console.log(setting);
       _settings = setting;

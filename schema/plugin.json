@@ -6,11 +6,15 @@
   "properties": {
       "configured_rooms": {
         "type": "array",
+        "items": {
+          "$ref": "#/$defs/room_config"
+        },
         "title": "Configured rooms",
         "description": "Configure Jitsi rooms.",
         "default": [{
           "domain": "meet.jit.si",
           "options": {
+            "roomAlias":"my room",
             "roomName": "jupyterlab-jitsi-example-room",
             "configOverwrite": {
               "enableWelcomePage": false,
@@ -32,5 +36,34 @@
         }]
       }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "$defs": {
+    "room_config" : {
+      "type":"object",
+      "properties":{
+        "domain" : {"type":"string"},
+        "options" : {"type":"object"}
+      },
+      "required" : ["domain", "options"]
+    },
+    "options" : {
+      "type":"object",
+      "properties":{
+        "roomAlias" : {"type":"string"},
+        "roomName" : {"type":"string"},
+        "configOverwrite" : {"$ref": "#/$defs/config_overwrite"}
+      },
+      "required" : ["roomName", "configOverwrite"]
+    },
+    "config_overwrite":{
+      "type":"object",
+      "properties":{
+        "roomAlias" : {"type":"string"},
+        "roomName" : {"type":"string"},
+        "configOverwrite" : {"type": "object"}
+      },
+      "required" : ["roomName", "configOverwrite"],
+      "additionalProperties": false
+    }
+  }
 }
