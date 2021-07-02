@@ -1,7 +1,9 @@
 {
   "jupyter.lab.shortcuts": [],
-  "title": "jupyterlab-jitsi",
-  "description": "jupyterlab-jitsi settings.",
+  "jupyter.lab.setting-icon": "jupyterlab-jitsi:icon",
+  "jupyter.lab.setting-icon-label": "Jitsi Settings",
+  "title": "Jitsi Settings",
+  "description": "Jitsi Settings.",
   "type": "object",
   "properties": {
       "configured_rooms": {
@@ -14,7 +16,7 @@
         "default": [{
           "domain": "meet.jit.si",
           "options": {
-            "roomAlias":"my room",
+            "roomAlias": "my room",
             "roomName": "jupyterlab-jitsi-example-room",
             "configOverwrite": {
               "enableWelcomePage": false,
